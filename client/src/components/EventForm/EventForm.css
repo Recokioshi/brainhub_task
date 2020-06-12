@@ -1,0 +1,29 @@
+.event-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #303030;
+}
+
+.event-form label {
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+.event-form input {
+  width: 100%;
+}
+
+.event-form-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  font-weight: normal;
+}

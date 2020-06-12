@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from '../../logo.svg';
 import './App.css';
-import EventForm from '../EventForm/EventForm';
+import EventForm from '../EventForm/EventFormComponent';
 
 function App() {
   return (
