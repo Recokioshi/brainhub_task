@@ -17,7 +17,8 @@ const EventForm: React.FC<EventFormProps> = ({ onFormSubmit }) => {
     <div className="event-form-wrapper">
       <form
         className="event-form"
-        onSubmit={() => {
+        onSubmit={(e) => {
+          e.preventDefault();
           onFormSubmit({ name, surname, email, eventDate: new Date(eventDate) });
         }}
       >
@@ -25,7 +26,14 @@ const EventForm: React.FC<EventFormProps> = ({ onFormSubmit }) => {
           Submit now for our <br /> exiting event!
         </h1>
         <label htmlFor="name">First name</label>
-        <input id="name" name="name" type="text" value={name} onChange={setValueFromOnChangeWithFunction(setName)} />
+        <input
+          id="name"
+          name="name"
+          type="text"
+          value={name}
+          onChange={setValueFromOnChangeWithFunction(setName)}
+          required
+        />
         <label htmlFor="surname">Last name</label>
         <input
           id="surname"
@@ -33,6 +41,7 @@ const EventForm: React.FC<EventFormProps> = ({ onFormSubmit }) => {
           type="text"
           value={surname}
           onChange={setValueFromOnChangeWithFunction(setSurname)}
+          required
         />
         <label htmlFor="email">Email</label>
         <input
@@ -41,6 +50,7 @@ const EventForm: React.FC<EventFormProps> = ({ onFormSubmit }) => {
           type="email"
           value={email}
           onChange={setValueFromOnChangeWithFunction(setEmail)}
+          required
         />
         <label htmlFor="event-date">Event date</label>
         <input
@@ -49,6 +59,7 @@ const EventForm: React.FC<EventFormProps> = ({ onFormSubmit }) => {
           type="date"
           value={eventDate}
           onChange={setValueFromOnChangeWithFunction(setEventDate)}
+          required
         />
         <button>Submit</button>
       </form>

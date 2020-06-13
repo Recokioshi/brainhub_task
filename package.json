@@ -5,7 +5,7 @@
     "client": "cd client && npm run start",
     "client:test": "cd client && npm run test",
     "server": "nodemon src/server.ts",
-    "server:test": "jest --config ./jest.config.js",
+    "server:test": "jest --watch --config ./jest.config.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "dependencies": {
