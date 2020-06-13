@@ -17,7 +17,7 @@
     "@types/jest": "^26.0.0",
     "@types/node": "^14.0.13",
     "concurrently": "^4.0.1",
-    "jest": "^26.0.1",
+    "jest": "^24.9.0",
     "nodemon": "^2.0.4",
     "ts-jest": "^26.1.0",
     "ts-node": "^8.10.2",
