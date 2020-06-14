@@ -1,17 +1,23 @@
 import * as express from 'express';
-import { isRequestValid } from './addEvent';
+import bodyParser = require('body-parser');
+import { isRequestValid } from './inputValidator';
+import { processRequest } from './addEvent';
 
 const app = express();
+const PORT = process.env.PORT || 5000;
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
   res.send('Hello World');
 });
 app.post('/addEvent', (req, res) => {
-  var isValid = isRequestValid(req.body);
-  res.sendStatus(isValid ? 200 : 500);
+  console.log(`got ${JSON.stringify(req.body)}`);
+  const results = processRequest(req.body);
+  res.status(results.valid ? 200 : 500).send(results.valid ? 'OK' : results.messaage);
 });
 
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running in new http://localhost:${PORT}`);
 });

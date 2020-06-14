@@ -1,9 +1,4 @@
-export const containsAllMandatoryFields = (req: Object): boolean =>
-  req.hasOwnProperty('name') &&
-  req.hasOwnProperty('surname') &&
-  req.hasOwnProperty('email') &&
-  req.hasOwnProperty('eventDate');
-
-export const isRequestValid = (req: Object): boolean => {
-  return containsAllMandatoryFields(req);
+export const processRequest = (req: Object): { valid: boolean; messaage: string } => {
+  //var isValid = isRequestValid(req.body);
+  return { valid: true, messaage: 'OK' };
 };

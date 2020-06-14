@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './EventForm.css';
-import { EventFormProps } from './EventFormTypes';
+import { EventFormProps, ValidationErrorsProps } from './EventFormTypes';
 
 export const setValueFromOnChangeWithFunction = (fun: (input: any) => void) => (
   event: React.ChangeEvent<HTMLInputElement>,
@@ -8,18 +8,35 @@ export const setValueFromOnChangeWithFunction = (fun: (input: any) => void) => (
   fun(event.target.value);
 };
 
-const EventForm: React.FC<EventFormProps> = ({ onFormSubmit }) => {
+const ValidationErrors: React.FC<ValidationErrorsProps> = ({ validationErrors }) => {
+  return (
+    <div>
+      {validationErrors.map((error) => (
+        <div key={error}>{error}</div>
+      ))}
+    </div>
+  );
+};
+
+const EventForm: React.FC<EventFormProps> = ({ onFormSubmit, getValidationErrors }) => {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [eventDate, setEventDate] = useState(0);
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
   return (
     <div className="event-form-wrapper">
       <form
         className="event-form"
         onSubmit={(e) => {
+          const formInput = { name, surname, email, eventDate: new Date(eventDate) };
           e.preventDefault();
-          onFormSubmit({ name, surname, email, eventDate: new Date(eventDate) });
+          const validationErrors = getValidationErrors(formInput);
+          if (validationErrors.length) {
+            setValidationErrors(validationErrors);
+          } else {
+            onFormSubmit(formInput);
+          }
         }}
       >
         <h1>
@@ -62,6 +79,7 @@ const EventForm: React.FC<EventFormProps> = ({ onFormSubmit }) => {
           required
         />
         <button>Submit</button>
+        <ValidationErrors validationErrors={validationErrors} />
       </form>
     </div>
   );
