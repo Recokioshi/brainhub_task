@@ -1,6 +1,5 @@
 import * as express from 'express';
 import bodyParser = require('body-parser');
-import { isRequestValid } from './inputValidator';
 import { processRequest } from './addEvent';
 
 const app = express();

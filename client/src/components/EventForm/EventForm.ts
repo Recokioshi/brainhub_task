@@ -4,7 +4,7 @@ import { EventFormStateProps, EventFormDispatchProps, FormInput } from './EventF
 import { Dispatch } from 'redux';
 import { State } from '../../redux/types';
 import { submitForm } from '../../services/apiServices';
-import { getValidationErrors } from './inputValidator';
+import { getValidationErrors } from '../../common/inputValidator';
 
 export const onFormSubmit = (dispatch: Dispatch) => async ({ name, surname, email, eventDate }: FormInput) => {
   const response = await submitForm(name, surname, email, eventDate);

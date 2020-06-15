@@ -1,4 +1,6 @@
-export const processRequest = (req: Object): { valid: boolean; messaage: string } => {
-  //var isValid = isRequestValid(req.body);
-  return { valid: true, messaage: 'OK' };
+import { isRequestValid } from '../client/src/common/inputValidator';
+
+export const processRequest = (request: Object): { valid: boolean; messaage: string } => {
+  var isValid = isRequestValid(request);
+  return { valid: isValid, messaage: isValid ? 'OK' : 'ERROR' };
 };
