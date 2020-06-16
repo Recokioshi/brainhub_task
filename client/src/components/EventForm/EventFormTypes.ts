@@ -1,6 +1,8 @@
 export type FormInput = { name: string; surname: string; email: string; eventDate: Date };
 
-export type EventFormStateProps = {};
+export type EventFormStateProps = {
+  errorsFromResponse: string[];
+};
 
 export type EventFormDispatchProps = {
   onFormSubmit: ({}: FormInput) => void;

@@ -1,9 +1,11 @@
-import { ActionRequestSent, ActionGotResponse } from './types';
+import { ActionRequestSent, ActionGotResponse, ActionResetFlow, ActionType } from './types';
 
-export const requestSent = (): ActionRequestSent => ({ type: 'REQUEST_SENT' });
+export const requestSent = (): ActionRequestSent => ({ type: ActionType.REQUEST_SENT });
 
-export const gotResponse = (responseOK: boolean, responseMessage: string): ActionGotResponse => ({
-  type: 'GOT_RESPONSE',
-  responseMessage,
+export const resetFlow = (): ActionResetFlow => ({ type: ActionType.RESET_FLOW });
+
+export const gotResponse = (responseOK: boolean, responseMessages: string[]): ActionGotResponse => ({
+  type: ActionType.GOT_RESPONSE,
+  responseMessages,
   responseOK,
 });

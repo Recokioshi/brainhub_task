@@ -1,14 +1,23 @@
+export enum FormState {
+  ENTERED,
+  REQUEST_SENT,
+  GOT_RESPONSE,
+}
+
 export type State = {
-  responseMessage: string;
+  responseMessages: string[];
   responseOK: boolean;
+  formState: FormState;
 };
 
-export type GOT_RESPONSE = 'GOT_RESPONSE';
-export type REQUEST_SENT = 'REQUEST_SENT';
+export enum ActionType {
+  GOT_RESPONSE,
+  REQUEST_SENT,
+  RESET_FLOW,
+}
 
-export type ActionType = GOT_RESPONSE | REQUEST_SENT;
+export type ActionGotResponse = { type: ActionType.GOT_RESPONSE; responseMessages: string[]; responseOK: boolean };
+export type ActionRequestSent = { type: ActionType.REQUEST_SENT };
+export type ActionResetFlow = { type: ActionType.RESET_FLOW };
 
-export type ActionGotResponse = { type: GOT_RESPONSE; responseMessage: string; responseOK: boolean };
-export type ActionRequestSent = { type: REQUEST_SENT };
-
-export type Action = ActionGotResponse | ActionRequestSent;
+export type Action = ActionGotResponse | ActionRequestSent | ActionResetFlow;

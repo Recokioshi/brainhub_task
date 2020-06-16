@@ -5,13 +5,18 @@ import { Dispatch } from 'redux';
 import { State } from '../../redux/types';
 import { submitForm } from '../../services/apiServices';
 import { getValidationErrors } from '../../common/inputValidator';
+import { gotResponse, requestSent } from '../../redux/actions';
 
 export const onFormSubmit = (dispatch: Dispatch) => async ({ name, surname, email, eventDate }: FormInput) => {
-  const response = await submitForm(name, surname, email, eventDate);
-  console.log(`got data: ${response}`);
+  dispatch(requestSent());
+  const { responseOK, responseMessages } = await submitForm(name, surname, email, eventDate);
+  dispatch(gotResponse(responseOK, responseMessages));
 };
 
-const mapStateToProps = (state: State): EventFormStateProps => ({});
+const mapStateToProps = (state: State): EventFormStateProps => {
+  console.log(`current state: ${state.formState} `);
+  return { errorsFromResponse: state.responseMessages };
+};
 
 const mapDispatchToProps = (dispatch: Dispatch): EventFormDispatchProps => ({
   getValidationErrors,
