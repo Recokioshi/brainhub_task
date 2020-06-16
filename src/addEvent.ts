@@ -1,13 +1,30 @@
 import { getValidationErrors } from '../client/src/common/inputValidator';
+import { Collection } from 'mongodb';
 
-export const processRequest = (request: {
+type RequestInput = {
   name?: string | undefined;
   surname?: string | undefined;
   email?: string | undefined;
   eventDate?: string | undefined;
-}): { valid: boolean; message: string } => {
+};
+
+export const processRequest = async (
+  request: RequestInput,
+  collection: Collection<any>,
+): Promise<{ valid: boolean; message: string }> => {
   const inputObject = { ...request, eventDate: new Date(String(request.eventDate)) };
   const validationErrors = getValidationErrors(inputObject);
   const isValid = !validationErrors.length;
-  return { valid: isValid, message: isValid ? 'OK' : JSON.stringify(validationErrors) };
+
+  if (isValid) {
+    try {
+      await collection.insertOne(inputObject);
+      return { valid: isValid, message: 'OK' };
+    } catch (err) {
+      console.log(`error while adding new submission: ${err}`);
+      return { valid: false, message: JSON.stringify([err]) };
+    }
+  } else {
+    return { valid: false, message: JSON.stringify(validationErrors) };
+  }
 };
