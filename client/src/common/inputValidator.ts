@@ -34,7 +34,3 @@ export const getValidationErrors = (req: {
 
   return errors;
 };
-
-export const isRequestValid = (req: Object): boolean => {
-  return getValidationErrors(req).length === 0;
-};
