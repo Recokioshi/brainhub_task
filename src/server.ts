@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 app.post('/addEvent', (req, res) => {
   console.log(`got ${JSON.stringify(req.body)}`);
   const results = processRequest(req.body);
-  res.status(results.valid ? 200 : 500).send(results.valid ? 'OK' : results.messaage);
+  res.status(results.valid ? 200 : 500).send(results.valid ? 'OK' : results.message);
 });
 
 app.listen(PORT, () => {

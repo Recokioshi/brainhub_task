@@ -1,6 +1,13 @@
-import { isRequestValid } from '../client/src/common/inputValidator';
+import { isRequestValid, getValidationErrors } from '../client/src/common/inputValidator';
 
-export const processRequest = (request: Object): { valid: boolean; messaage: string } => {
-  var isValid = isRequestValid(request);
-  return { valid: isValid, messaage: isValid ? 'OK' : 'ERROR' };
+export const processRequest = (request: {
+  name?: string | undefined;
+  surname?: string | undefined;
+  email?: string | undefined;
+  eventDate?: Date | undefined;
+}): { valid: boolean; message: string } => {
+  const inputObject = { ...request, eventDate: new Date(String(request.eventDate)) };
+  const validationErrors = getValidationErrors(inputObject);
+  const isValid = !validationErrors.length;
+  return { valid: isValid, message: isValid ? 'OK' : JSON.stringify(validationErrors) };
 };
