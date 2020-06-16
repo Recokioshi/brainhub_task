@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 import { State, Action, ActionType, FormState } from './types';
 
-const defaultState: State = {
+export const defaultState: State = {
   responseMessages: [],
   responseOK: true,
   formState: FormState.ENTERED,
@@ -17,9 +17,9 @@ const reducer: Reducer = (state: State = defaultState, action: Action): State =>
         formState: FormState.GOT_RESPONSE,
       };
     case ActionType.RESET_FLOW:
-      return { ...state, responseMessages: [], responseOK: true, formState: FormState.ENTERED };
+      return { ...defaultState };
     case ActionType.REQUEST_SENT:
-      return { ...state, responseMessages: [], responseOK: true, formState: FormState.REQUEST_SENT };
+      return { ...defaultState, formState: FormState.REQUEST_SENT };
     default:
       return { ...state };
   }

@@ -1,11 +1,12 @@
 import { ActionRequestSent, ActionGotResponse, ActionResetFlow, ActionType } from './types';
+import { response } from 'express';
 
 export const requestSent = (): ActionRequestSent => ({ type: ActionType.REQUEST_SENT });
 
 export const resetFlow = (): ActionResetFlow => ({ type: ActionType.RESET_FLOW });
 
-export const gotResponse = (responseOK: boolean, responseMessages: string[]): ActionGotResponse => ({
+export const gotResponse = (responseOK: boolean = false, responseMessages: string[] = []): ActionGotResponse => ({
   type: ActionType.GOT_RESPONSE,
-  responseMessages,
-  responseOK,
+  responseMessages: Array.isArray(responseMessages) ? responseMessages : [],
+  responseOK: typeof responseOK === 'boolean' ? responseOK : false,
 });
