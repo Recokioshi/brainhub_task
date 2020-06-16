@@ -8,7 +8,7 @@ import { getValidationErrors } from '../../common/inputValidator';
 
 export const onFormSubmit = (dispatch: Dispatch) => async ({ name, surname, email, eventDate }: FormInput) => {
   const response = await submitForm(name, surname, email, eventDate);
-  console.log(`got data: ${JSON.stringify(response)}`);
+  console.log(`got data: ${response}`);
 };
 
 const mapStateToProps = (state: State): EventFormStateProps => ({});

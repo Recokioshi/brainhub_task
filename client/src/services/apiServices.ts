@@ -7,8 +7,11 @@ export const submitForm = async (
   surname: string,
   email: string,
   eventDate: Date,
-): Promise<{ responseOK: boolean; responseMessage: string }> => {
-  const response = await axios.post(`${BASE_URL}addEvent`, { name, surname, email, eventDate });
-  const responseOK = response.status === 200 ? true : false;
-  return { responseOK, responseMessage: response.statusText };
+): Promise<{ responseOK: boolean; responseMessages: string[] }> => {
+  try {
+    await axios.post(`${BASE_URL}addEvent`, { name, surname, email, eventDate });
+    return { responseOK: true, responseMessages: [] };
+  } catch (error) {
+    return { responseOK: false, responseMessages: error.response.data };
+  }
 };

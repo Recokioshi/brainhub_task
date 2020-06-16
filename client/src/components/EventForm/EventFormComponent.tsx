@@ -32,7 +32,7 @@ const EventForm: React.FC<EventFormProps> = ({ onFormSubmit, getValidationErrors
           const formInput = { name, surname, email, eventDate: new Date(eventDate) };
           e.preventDefault();
           const validationErrors = getValidationErrors(formInput);
-          if (validationErrors.length) {
+          if (validationErrors.length && false) {
             setValidationErrors(validationErrors);
           } else {
             onFormSubmit(formInput);
@@ -43,14 +43,7 @@ const EventForm: React.FC<EventFormProps> = ({ onFormSubmit, getValidationErrors
           Submit now for our <br /> exiting event!
         </h1>
         <label htmlFor="name">First name</label>
-        <input
-          id="name"
-          name="name"
-          type="text"
-          value={name}
-          onChange={setValueFromOnChangeWithFunction(setName)}
-          required
-        />
+        <input id="name" name="name" type="text" value={name} onChange={setValueFromOnChangeWithFunction(setName)} />
         <label htmlFor="surname">Last name</label>
         <input
           id="surname"
