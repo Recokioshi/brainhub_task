@@ -144,7 +144,22 @@ describe('inputValidator', () => {
   describe('inputValidator', () => {
     test('returns true for valid object input', () => {
       const returnValue = isRequestValid({ name: 'A', surname: 'B', email: 'AAA@BBB.com', eventDate: new Date() });
-      expect(returnValue).toBe(true);
+      expect(returnValue).toBeTruthy();
+    });
+
+    test('returns false for missing field in the input', () => {
+      const returnValue = isRequestValid({ surname: 'B', email: 'AAA@BBB.com', eventDate: new Date() });
+      expect(returnValue).toBeFalsy();
+    });
+
+    test('returns false for empty field in the input', () => {
+      const returnValue = isRequestValid({ name: '', surname: 'B', email: 'AAA@BBB.com', eventDate: new Date() });
+      expect(returnValue).toBeFalsy();
+    });
+
+    test('returns false for wrong email format in the input', () => {
+      const returnValue = isRequestValid({ name: 'A', surname: 'B', email: 'AAABBB.com', eventDate: new Date() });
+      expect(returnValue).toBeFalsy();
     });
   });
 });

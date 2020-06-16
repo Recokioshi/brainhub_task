@@ -14,7 +14,6 @@ export const onFormSubmit = (dispatch: Dispatch) => async ({ name, surname, emai
 };
 
 const mapStateToProps = (state: State): EventFormStateProps => {
-  console.log(`current state: ${state.formState} `);
   return { errorsFromResponse: state.responseMessages };
 };
 
