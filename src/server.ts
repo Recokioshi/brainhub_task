@@ -20,19 +20,7 @@ MongoClient.connect(String(process.env.DATABASE_URL), { useUnifiedTopology: true
     app.post('/addEvent', async (req, res) => {
       console.log(`got ${JSON.stringify(req.body)}`);
       const results = await processRequest(req.body, submissionsCollection);
-
       res.status(results.valid ? 200 : 500).send(results.valid ? 'OK' : results.message);
-    });
-
-    app.get('/', (req, res) => {
-      db.collection('submissions')
-        .find()
-        .toArray()
-        .then((results) => {
-          res.status(200).send(results);
-        })
-        .catch((error) => console.error(error));
-      // ...
     });
 
     app.listen(PORT, () => {

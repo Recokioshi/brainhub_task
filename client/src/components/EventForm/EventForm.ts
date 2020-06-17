@@ -9,8 +9,8 @@ import { gotResponse, requestSent } from '../../redux/actions';
 
 export const onFormSubmit = (dispatch: Dispatch) => async ({ name, surname, email, eventDate }: FormInput) => {
   dispatch(requestSent());
-  const { responseOK, responseMessages } = await submitForm(name, surname, email, eventDate);
-  dispatch(gotResponse(responseOK, responseMessages));
+  const { responseOK, responseMessage } = await submitForm(name, surname, email, eventDate);
+  dispatch(gotResponse(responseOK, responseMessage ? [responseMessage] : []));
 };
 
 const mapStateToProps = (state: State): EventFormStateProps => {

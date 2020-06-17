@@ -8,7 +8,7 @@ describe('EventForm', () => {
     const dispatch = jest.fn();
     actions.requestSent = jest.fn();
     actions.gotResponse = jest.fn((responseOK: boolean, responseMessages: string[]) => {});
-    apiServices.submitForm = jest.fn(() => ({ responseOK: true, responseMessages: [] }));
+    apiServices.submitForm = jest.fn(() => ({ responseOK: true, responseMessage: '' }));
     onFormSubmit(dispatch)({ name: 'A', surname: 'B', email: 'AAA@BBB.com', eventDate: date });
     test('dispatch is called twice', () => {
       expect(dispatch.mock.calls.length === 2);

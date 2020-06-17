@@ -8,19 +8,19 @@ describe('apiServices', () => {
         if (body.name) {
           return null;
         } else {
-          throw { response: { data: ['error'] } };
+          throw 'error';
         }
       },
     );
     test('should return { responseOK: true, responseMessages: [] } if request is successful', async () => {
       // @ts-ignore
       const resuls = await submitForm('A', 'B', 'AAA@BBB.com', new Date());
-      expect(resuls).toMatchObject({ responseOK: true, responseMessages: [] });
+      expect(resuls).toMatchObject({ responseOK: true, responseMessage: '' });
     });
     test('should return { responseOK: false, responseMessages: [messages from exception] } if request is unsuccessful', async () => {
       // @ts-ignore
       const resuls = await submitForm('', 'B', 'AAA@BBB.com', new Date());
-      expect(resuls).toMatchObject({ responseOK: false, responseMessages: ['error'] });
+      expect(resuls).toMatchObject({ responseOK: false, responseMessage: 'error' });
     });
   });
 });
