@@ -1,4 +1,5 @@
-import { submitForm } from './apiServices';
+import { submitForm, getResponseObjectForRejectedRequest } from './apiServices';
+import { AxiosResponse } from 'axios';
 let axios = require('axios');
 
 describe('apiServices', () => {
@@ -8,7 +9,7 @@ describe('apiServices', () => {
         if (body.name) {
           return null;
         } else {
-          throw 'error';
+          throw { response: { data: 'error', status: 403 } };
         }
       },
     );
@@ -21,6 +22,21 @@ describe('apiServices', () => {
       // @ts-ignore
       const resuls = await submitForm('', 'B', 'AAA@BBB.com', new Date());
       expect(resuls).toMatchObject({ responseOK: false, responseMessage: 'error' });
+    });
+  });
+
+  describe('getResponseObjectForRejectedRequest', () => {
+    test('should return { responseOK: false, responseMessages: response.data } for status 403', () => {
+      const respObject = getResponseObjectForRejectedRequest({ status: 403, data: ['data error'] } as AxiosResponse);
+      expect(respObject).toMatchObject({ responseOK: false, responseMessage: ['data error'] });
+    });
+
+    test('should return { responseOK: false, responseMessages: response.statusText } for status other than 403', () => {
+      const respObject = getResponseObjectForRejectedRequest(({
+        status: 500,
+        statusText: 'message error',
+      } as unknown) as AxiosResponse);
+      expect(respObject).toMatchObject({ responseOK: false, responseMessage: 'message error' });
     });
   });
 });

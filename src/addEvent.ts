@@ -11,7 +11,7 @@ type RequestInput = {
 export const processRequest = async (
   request: RequestInput,
   collection: Collection<any>,
-): Promise<{ valid: boolean; message: string }> => {
+): Promise<{ valid: boolean; status: number; message: string }> => {
   const inputObject = { ...request, eventDate: new Date(String(request.eventDate)) };
   const validationErrors = getValidationErrors(inputObject);
   const isValid = !validationErrors.length;
@@ -19,12 +19,13 @@ export const processRequest = async (
   if (isValid) {
     try {
       await collection.insertOne(inputObject);
-      return { valid: isValid, message: 'OK' };
+      return { valid: isValid, status: 200, message: 'OK' };
     } catch (err) {
       console.log(`error while adding new submission: ${err}`);
-      return { valid: false, message: JSON.stringify([err]) };
+      return { valid: false, status: 500, message: JSON.stringify([err]) };
     }
   } else {
-    return { valid: false, message: JSON.stringify(validationErrors) };
+    console.log(`request is invalid: ${validationErrors}`);
+    return { valid: false, status: 403, message: JSON.stringify(validationErrors) };
   }
 };
