@@ -2,6 +2,7 @@ export type FormInput = { name: string; surname: string; email: string; eventDat
 
 export type EventFormStateProps = {
   errorsFromResponse: string[];
+  isFormDisabled: boolean;
 };
 
 export type EventFormDispatchProps = {

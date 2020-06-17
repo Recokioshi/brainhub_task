@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import EventForm from './EventFormComponent';
 import { EventFormStateProps, EventFormDispatchProps, FormInput } from './EventFormTypes';
 import { Dispatch } from 'redux';
-import { State } from '../../redux/types';
+import { State, FormState } from '../../redux/types';
 import { submitForm } from '../../services/apiServices';
 import { getValidationErrors } from '../../common/inputValidator';
 import { gotResponse, requestSent } from '../../redux/actions';
@@ -14,7 +14,7 @@ export const onFormSubmit = (dispatch: Dispatch) => async ({ name, surname, emai
 };
 
 const mapStateToProps = (state: State): EventFormStateProps => {
-  return { errorsFromResponse: state.responseMessages };
+  return { errorsFromResponse: state.responseMessages, isFormDisabled: state.formState === FormState.REQUEST_SENT };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): EventFormDispatchProps => ({
