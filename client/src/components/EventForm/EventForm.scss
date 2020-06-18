@@ -1,0 +1,83 @@
+$bg-color: #ffffff;
+$button-bg-color: #5331d5;
+$button-bg-color-hovered: #2e1b84;
+$border-color: #b7b6bc;
+$border-color-focused: #5331d5;
+$text-color: #2c012f;
+$error-bg-color: rgb(228, 68, 68);
+
+.event-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  h1 {
+    font-weight: normal;
+    text-align: center;
+    margin-top: 7%;
+  }
+
+  .form-fieldset {
+    border: none;
+
+    .event-form {
+      display: flex;
+      width: 400px;
+      padding: 40px;
+      background-color: $bg-color;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: $text-color;
+
+      label {
+        margin-top: 10%;
+      }
+
+      input {
+        width: 80%;
+        margin: 10px;
+        padding: 9px;
+        border: none;
+        border-bottom: 2px solid $border-color;
+        &:focus {
+          outline: none;
+          border-color: $border-color-focused;
+        }
+      }
+
+      button {
+        background-color: $button-bg-color;
+        border: none;
+        border-radius: 0px;
+        margin: 10px;
+        padding: 12px 40px;
+        font-size: 1.1em;
+        color: white;
+        font-weight: 100;
+        text-transform: uppercase;
+        &:hover {
+          background-color: $button-bg-color-hovered;
+          cursor: pointer;
+        }
+        &:active {
+          outline: none;
+        }
+      }
+
+      .validation-errors-wrapper {
+        width: 100%;
+        .validation-error {
+          margin: 10px;
+          background: $error-bg-color;
+          border-radius: 7px;
+          color: white;
+          padding: 5px 20px;
+          font-size: 0.8rem;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

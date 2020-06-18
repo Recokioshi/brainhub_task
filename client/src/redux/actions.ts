@@ -1,5 +1,4 @@
 import { ActionRequestSent, ActionGotResponse, ActionResetFlow, ActionType } from './types';
-import { response } from 'express';
 
 export const requestSent = (): ActionRequestSent => ({ type: ActionType.REQUEST_SENT });
 

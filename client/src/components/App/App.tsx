@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import { connect } from 'react-redux';
 import { AppStateProps, AppDispatchProps } from './AppTypes';
 import { State } from '../../redux/types';

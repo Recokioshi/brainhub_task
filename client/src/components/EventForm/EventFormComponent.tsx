@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './EventForm.css';
+import './EventForm.scss';
 import { EventFormProps, ValidationErrorsProps } from './EventFormTypes';
 
 export const setValueFromOnChangeWithFunction = (fun: (input: any) => void) => (
@@ -10,9 +10,11 @@ export const setValueFromOnChangeWithFunction = (fun: (input: any) => void) => (
 
 const ValidationErrors: React.FC<ValidationErrorsProps> = ({ validationErrors }) => {
   return (
-    <div>
+    <div className="validation-errors-wrapper">
       {validationErrors.map((error) => (
-        <div key={error}>{error}</div>
+        <div className="validation-error" key={error}>
+          {error}
+        </div>
       ))}
     </div>
   );
@@ -31,6 +33,7 @@ const EventForm: React.FC<EventFormProps> = ({
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   return (
     <div className="event-form-wrapper">
+      <h1>Submit now for our exiting event!</h1>
       <fieldset disabled={isFormDisabled} className="form-fieldset">
         <form
           className="event-form"
@@ -45,40 +48,38 @@ const EventForm: React.FC<EventFormProps> = ({
             }
           }}
         >
-          <h1>
-            Submit now for our <br /> exiting event!
-          </h1>
-          <label htmlFor="name">First name</label>
           <input
             id="name"
             name="name"
+            placeholder="name"
             type="text"
             value={name}
             onChange={setValueFromOnChangeWithFunction(setName)}
             required
           />
-          <label htmlFor="surname">Last name</label>
           <input
             id="surname"
             name="surname"
+            placeholder="surname"
             type="text"
             value={surname}
             onChange={setValueFromOnChangeWithFunction(setSurname)}
             required
           />
-          <label htmlFor="email">Email</label>
           <input
             id="email"
             name="email"
+            placeholder="email"
             type="email"
             value={email}
             onChange={setValueFromOnChangeWithFunction(setEmail)}
             required
           />
-          <label htmlFor="event-date">Event date</label>
+          <label htmlFor="event-date">Pick prefered event date</label>
           <input
             id="evet-date"
             name="evet-date"
+            placeholder="event date"
             type="date"
             value={eventDate}
             onChange={setValueFromOnChangeWithFunction(setEventDate)}
