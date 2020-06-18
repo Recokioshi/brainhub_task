@@ -1,5 +1,6 @@
 import * as express from 'express';
 import bodyParser = require('body-parser');
+import * as path from 'path';
 import { processRequest } from './addEvent';
 import { MongoClient } from 'mongodb';
 require('dotenv').config();
@@ -22,6 +23,16 @@ MongoClient.connect(String(process.env.DATABASE_URL), { useUnifiedTopology: true
       const results = await processRequest(req.body, submissionsCollection);
       res.status(results.status).send(results.message);
     });
+
+    if (process.env.NODE_ENV === 'production') {
+      // Serve any static files
+      app.use(express.static(path.join(__dirname, 'client/build')));
+
+      // Handle React routing, return all requests to React app
+      app.get('*', function (req, res) {
+        res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+      });
+    }
 
     app.listen(PORT, () => {
       console.log(`Server is running in new http://localhost:${PORT}`);
