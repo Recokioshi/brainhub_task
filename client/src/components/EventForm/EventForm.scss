@@ -71,10 +71,9 @@ $error-bg-color: rgb(228, 68, 68);
         .validation-error {
           margin: 10px;
           background: $error-bg-color;
-          border-radius: 7px;
           color: white;
-          padding: 5px 20px;
-          font-size: 0.8rem;
+          padding: 7px 20px;
+          font-size: 0.9rem;
           text-align: center;
         }
       }

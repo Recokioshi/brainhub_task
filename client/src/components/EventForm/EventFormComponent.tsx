@@ -86,7 +86,7 @@ const EventForm: React.FC<EventFormProps> = ({
             required
           />
           <button>Submit</button>
-          <ValidationErrors validationErrors={[...validationErrors, ...errorsFromResponse]} />
+          <ValidationErrors validationErrors={[...validationErrors, ...errorsFromResponse, 'errors']} />
         </form>
       </fieldset>
     </div>
