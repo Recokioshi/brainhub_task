@@ -19,7 +19,7 @@ I used Express.js with MongoDB to handle requests from the client.
 
 ## installation
 
-As this project contains client and server side so please run install in the root folder and in the /client folder.
-
-All tests can be run with "client:test" and "server:test" scripts.
-You can run the whole app with "dev" script.
+- As this project contains client and server side so please run install in the root folder and in the /client folder.
+- Before you run the server please fill the DB address in the .env file with the DATABASE_URL variable, or directly in the server.ts file.
+- All tests can be run with "client:test" and "server:test" scripts.
+  You can run the whole app with "dev" script.
